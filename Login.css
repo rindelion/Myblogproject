@@ -11,15 +11,17 @@
 
 /* Start body rules */
 body {
-    background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
-background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
-background-attachment: fixed;
-  background-repeat: no-repeat;
+    /* background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+    background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%); */
+    background-image: url(797.jpg);
+    background-color: #cccccc;
+    background-attachment:local;
+    background-repeat: no-repeat;
 
     font-family: 'Vibur', cursive;
 /*   the main font */
     font-family: 'Abel', sans-serif;
-opacity: .95;
+    opacity: .95;
 /* background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); */
 }
 

@@ -18,16 +18,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Home - Simple Blog Template</title>
-    
+
+    <title>Login - Simple Blog Template</title>
+
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/simple-blog-template.css" rel="stylesheet">
-    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -38,9 +36,8 @@
   </head>
 
   <body>
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <header>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -50,7 +47,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html">Simple Blog</a>
+          <a class="navbar-brand" href="index.php">Simple Blog</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -59,24 +56,37 @@
               <a href="about.html">About</a>
             </li>
             <li>
-              <a href="login.html">Login</a>
+              <a href="login.html">Log out</a>
             </li>
-            <li>
+            <!-- <li>
               <a href="signup.html">Sign up</a>
-            </li>
+            </li> -->
           </ul>
         </div>
         <!-- /.navbar-collapse -->
       </div>
       <!-- /.container -->
     </nav>
+      <div class = "banner">
+        <div class = "container">
+          <h1 class = "banner-title">
+            <span>Art.</span> Design Blog
+          </h1>
+          <p>everything that you want to know about art & design</p>
+          <form>
+            <input type = "text" class = "search-input" placeholder="find your food . . .">
+            <button type = "submit" class = "search-btn">
+              <i class = "fas fa-search"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </header>
+    <!-- Navigation -->
     
-    <!-- Search bar -->
 
-    <form class="example" action="/action_page.php" style="margin:auto;max-width:300px">
-      <input type="text" placeholder="Search.." name="search2">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
+
+    
     <!-- Page Content -->
     <div class="container">
 
@@ -132,16 +142,6 @@
           
           
           ?>
-          <!-- Pager -->
-          <ul class="pager">
-            <li class="previous">
-              <a href="#">Prev</a>
-            </li>
-            <li class="next">
-              <a href="#">Next</a>
-            </li>
-          </ul>
-
         </div>
 
       </div>
@@ -162,7 +162,7 @@
         <!-- /.row -->
       </div>
     </footer>
-
+    
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -170,46 +170,67 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
 
-  </body>
-          
+  </body>  
 <style>
-body {
-  font-family: Arial;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-form.example input[type=text] {
-  padding: 10px;
-  font-size: 17px;
-  border: 1px solid grey;
-  float: left;
-  width: 80%;
-  background: #f1f1f1;
-}
-
-form.example button {
-  float: left;
-  width: 20%;
-  padding: 10px;
-  background: #2196F3;
-  color: white;
-  font-size: 17px;
-  border: 1px solid grey;
-  border-left: none;
-  cursor: pointer;
-}
-
-form.example button:hover {
-  background: #0b7dda;
-}
-
-form.example::after {
-  content: "";
-  clear: both;
-  display: table;
-}
-</style>
+  header{
+      min-height: 100vh;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(images/794.jpg) center/cover no-repeat fixed;
+      display: flex;
+      flex-direction: column;
+      justify-content: stretch;
+  }
+  .banner{
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #fff;
+  }
+  .banner-title{
+      font-size: 6rem;
+      font-family: var(--Playfair);
+      line-height: 1.2;
+  }
+  .banner-title span{
+      font-family: var(--Playfair);
+      color: var(--exDark);
+  }
+  .banner p{
+      padding: 1rem 0 2rem 0;
+      font-size: 1.5rem;
+      text-transform: capitalize;
+      font-family: var(--Roboto);
+      font-weight: 300;
+      word-spacing: 2px;
+  }
+  .banner form{
+      background: #fff;
+      border-radius: 2rem;
+      padding: 1.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+  }
+  .search-input{
+      color:gray;
+      font-family: var(--Roboto);
+      font-size: 1.6rem;
+      width: 100%;
+      outline: 0;
+      padding: 0.6rem 0;
+      border: none;
+  }
+  .search-input::placeholder{
+      text-transform: capitalize;
+  }
+  .search-btn{
+      width: 40px;
+      font-size: 1.1rem;
+      color: var(--dark);
+      border: none;
+      background: transparent;
+      outline: 0;
+      cursor: pointer;
+  }
+</style>       
 </html>
