@@ -28,37 +28,11 @@
 			$sql_command = "INSERT INTO $table (username, password,email, cookie) VALUES ('$name','$password','$email',null)";
 
 			if ($conn->query($sql_command) === TRUE)
-				$_SESSION['msg'] = "New record created successfully";
+				// $_SESSION['msg'] = "New record created successfully";
+				header("location: Blog.php");
 			else
 				$_SESSION['msg'] = $conn->error;
 
 			mysqli_close($conn);
 		}
 ?>
-<html>
-<head>
-	<title>Form Submit Confirmation</title>
-	<style>
-	    body{
-	    	font-family: Arial
-	    }
-		.label {
-			width: 10%;
-			float: left;
-		}
-		.info{
-			padding: 5px;
-		}
-		form{
-			padding-left: 30px;
-		}
-	</style>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</head>
-<body>
-	<?php
-		if (isset($_SESSION['msg']))
-			echo $_SESSION['msg'];
-	?>
-</body>
-</html>
