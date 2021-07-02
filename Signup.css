@@ -5,16 +5,19 @@
 }
 
 body {
-    background: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
-    background: linear-gradient(to top, #a8edea 0%, #fed6e3 100%);
+    background-image: url(https://media.sketchfab.com/models/4bc855c26a12428ebd9a152b2c9586b8/thumbnails/4c3d2deb43b147799d8d307c8feb92eb/1920x1080.jpeg?fbclid=IwAR0R_eA7g-xCoW7WZcZT4l5pu5lVi2g1gR7CCM0LIqgOEDQb7b4jZv8g4ew);
+    /* background: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
+    background: linear-gradient(to top, #a8edea 0%, #fed6e3 100%); */
     background-attachment: fixed;
     background-repeat: no-repeat;
+    background-size:100% 100%;
 }
 
 .content {
     width: 1280px;
     max-width: 100%;
     margin: 0 auto;
+    opacity:0.9;
 }
 
 
@@ -35,7 +38,7 @@ p {
 }
 
 .signup-wrapper .company-details {
-    background: url(https://www.dkn.tv/wp-content/uploads/2018/08/174975-15303743168541206671688-700x366.jpg);
+    background: url(https://media.sketchfab.com/models/4bc855c26a12428ebd9a152b2c9586b8/thumbnails/4c3d2deb43b147799d8d307c8feb92eb/1920x1080.jpeg?fbclid=IwAR0R_eA7g-xCoW7WZcZT4l5pu5lVi2g1gR7CCM0LIqgOEDQb7b4jZv8g4ew);
     background-size: cover;
     position: relative;
 }
@@ -97,7 +100,7 @@ p {
     font-family: 'Abel', sans-serif;
     font-weight: bold;
     font-size: 200%;
-    color: #fac6ef;
+    color: #13173f;
     padding: 5px;
     text-align: center;
 }
@@ -150,6 +153,7 @@ input::placeholder {
     .signup-wrapper .company-details .title {
         width: 90%;
         font-size: 1.5em;
+        color: #fffa56
     }
 }
 
@@ -196,7 +200,7 @@ input::placeholder {
             padding: 0 20px;
             width: 70%;
             margin: 0 auto;
-            color: #fff;
+            color: #f6e883;
             font-size: 1.2em;
             text-align: center;
             text-shadow: 1px 1px #4b4a4a;

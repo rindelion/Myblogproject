@@ -13,7 +13,7 @@
 body {
     /* background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
     background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%); */
-    background-image: url(images/3d-rendering-futuristic-sci-fi-techno-lights-cool-background.jpg);
+    background-image: url(https://media.sketchfab.com/models/4bc855c26a12428ebd9a152b2c9586b8/thumbnails/4c3d2deb43b147799d8d307c8feb92eb/1920x1080.jpeg?fbclid=IwAR0R_eA7g-xCoW7WZcZT4l5pu5lVi2g1gR7CCM0LIqgOEDQb7b4jZv8g4ew);
     background-color: #cccccc;
     background-attachment:local;
     background-repeat: no-repeat;
@@ -44,8 +44,8 @@ form {
     margin: 6% auto;
     box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
     padding: 2%;
-    background-image: linear-gradient(-225deg, #e57641 50%, #5e3316 50%);
-    opacity: 0.9;
+    background-image: linear-gradient(-225deg, #e1e1e1 50%, #020314 50%);
+    opacity: 0.95
 }
 /* form Container */
 form .con {
@@ -141,7 +141,7 @@ input:focus {
 /* buttons  */
 button {
     display: inline-block;
-    color: #252537;
+    color: #737389;
   
     width: 280px;
     height: 50px;
@@ -172,7 +172,7 @@ button {
 .frgt-pass {background: transparent;}
 
 /*     Sign Up button  */
-.sign-up {background: #B8F2E6;}
+.sign-up {background: #cbcfdb;}
 
 
 /* buttons hover */

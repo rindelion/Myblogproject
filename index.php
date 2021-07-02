@@ -1,6 +1,75 @@
 <?php
-    session_start();
-    include('conn.php');
+    function random_str(
+      int $length = 64,
+      string $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+   ): string {
+      if ($length < 1) {
+          throw new \RangeException("Length must be a positive integer");
+      }
+      $pieces = [];
+      $max = mb_strlen($keyspace, '8bit') - 1;
+      for ($i = 0; $i < $length; ++$i) {
+          $pieces []= $keyspace[random_int(0, $max)];
+      }
+      return implode('', $pieces);
+   }	
+
+   session_start();
+   include('conn.php');
+
+   if (isset($_POST['login'])){
+
+     $username=$_POST['username'];
+     $password=$_POST['password'];
+     
+
+     $query=mysqli_query($conn,"select * from user where username='$username' && password='$password'");
+     
+     
+     if (mysqli_num_rows($query) == 0){
+        $_SESSION['message']="Login Failed. User not Found!";
+        header('location:index.php');
+     }
+     else {
+         if(password_verify($password, $row['password'])){
+            $row=mysqli_fetch_array($query);
+         
+         //set up cookie
+         if (isset($_POST['remember'])){
+            //set up cookie 
+            setcookie("cookie", random_str(), time() + (86400 * 30));
+         }
+
+         $_SESSION['iduser']=$row['iduser'];
+         $_SESSION['username']=$row['username'];
+         header('location:blog.php');
+         }
+         else
+         {
+            $_SESSION['message']="Login Failed. User not Found!";
+            header('location:index.php');
+         }
+         
+     }
+  }
+  else{
+     if (isset($_COOKIE['cookie'])){
+
+        $cookie=$_COOKIE['cookie'];
+
+        $query=mysqli_query($conn,"select * from user where cookie='$cookie'");
+        $row=mysqli_fetch_array($query);
+
+        $_SESSION['iduser']=$row['iduser'];
+        $_SESSION['username']=$row['username'];
+        header('location:blog.php');
+     } else {
+        header('location:index.php');
+        $_SESSION['message']="Please Login!";
+     }
+  }
+
+  mysqli_close($conn);
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +83,7 @@
 <body>
    <div class="overlay">
    <!-- LOGN IN FORM by Omar Dsoky -->
-   <form method="POST" action="index.php">
+   <form method="POST">
       <head>
             <link rel="stylesheet" type="text/css" href="Login.css">
             <script type="text/javascript" src="Login.js"></script>
@@ -36,7 +105,9 @@
                <i class="fa fa-user-circle"></i>
             </span>
             <!--   user name Input-->
-            <input class="form-input" id="txt-input" type="text" placeholder="Username"value="<?php if (isset($_COOKIE["user"])){echo $_COOKIE["user"];}?>" name="username" >
+            <input class="form-input" id="username" type="text" placeholder="Username"value="
+               <?php if (isset($_COOKIE["user"])){echo $_COOKIE["user"];}?>" name="username"
+               required>
          
          <br>
          
@@ -46,7 +117,9 @@
             <i class="fa fa-key"></i>
             </span>
          <!--   Password Input-->
-         <input class="form-input" type="password" placeholder="Password" id="pwd"  name="password" value="<?php if (isset($_COOKIE["pass"])){echo $_COOKIE["pass"];}?>" name="password">
+         <input class="form-input" type="password" placeholder="Password" id="password"  name="password" value="
+            <?php if (isset($_COOKIE["pass"])){echo $_COOKIE["pass"];}?>" name="password"
+            required>
          
    <!--      Show/hide password  -->
           <span>
@@ -57,7 +130,7 @@
          <br>
    <!--        buttons -->
    <!--      button LogIn -->
-         <button action="Checklogin.php" onclick=Checknull() class="log-in"> Log In </button>
+         <button  class="log-in"> Log In </button>
 
          <!-- <span class = "input-item">
             <div class = "login-form"></div>
@@ -81,20 +154,12 @@
    <!--   End Conrainer  -->
       </div>
       
-      <script>
-         function Login(){
-            if (Checknull() && CheckLength())
-            {
-               document.getElementById("login-form").submit();
-               
-            }
-         }
-         
+      <script>        
          //Kiểm tra username password được nhập không
          function Checknull()
          {
             var user = document.getElementById("username").value;
-            var pwd = document.getElementById("passwd").value;
+            var pwd = document.getElementById("password").value;
             if (user=="" || pwd=="") {
                alert ("Username và password không được bỏ trống!");
                return false;
@@ -103,7 +168,7 @@
          }
          function CheckLength()
          {
-            var pwd = document.getElementById("passwd").value;
+            var pwd = document.getElementById("password").value;
             if (pwd.length<8)
             {
                alert ("Password có tối thiểu 8 kí tự.")

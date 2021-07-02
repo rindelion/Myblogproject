@@ -57,7 +57,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.php">Simple Blog</a>
+          <a class="navbar-brand" href="Blog.php">Simple Blog</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -66,7 +66,10 @@
               <a href="about.html">About</a>
             </li>
             <li>
-              <a href="login.html">Log out</a>
+              <a href="login.html">Profile</a>
+            </li>
+            <li>
+              <a href="index.php">Log out</a>
             </li>
             <!-- <li>
               <a href="signup.html">Sign up</a>
@@ -83,11 +86,11 @@
             <span>Game.</span> Design Blog
           </h1>
           <p>everything that you want to know about games</p>
-          <form class="example" action="/action_page.php">
-            <input type = "text" class = "search-input" placeholder="Find your game. . .">
+          <form class="example" action="Blog.php">
+            <input name="search" type = "text" class = "search-input" placeholder="Find your game. . .">           
             <button type = "submit" class = "search-btn">
-              <i class = "fas fa-search"></i>
-            </button>
+            <i class = "fas fa-search"></i>
+            </button>          
           </form>
         </div>
       </div>
@@ -115,42 +118,76 @@
                 //die("Connection failed: " . $conn->connect_error);
                     echo "connection failed!";
             }
-            else{
-                  
-              $sql_command = "SELECT * FROM posts";
+            else{             
+              if(isset($_GET['search']))
+              {
+                echo ($_GET['search']);
+                $search = $_GET['search'];
+                $sql_command = "SELECT * FROM $table WHERE (title like '%$search%' or content like '%$search%')"; 
+                echo $sql_command;            
+                $result = mysqli_query($conn, $sql_command);
+                if (mysqli_num_rows($result) > 0) {
+                          // output data of each row
+                          while($row = mysqli_fetch_assoc($result)) {
+                            $id = $row["idpost"];
+                            $title = $row["title"];
+                            $username = $row["username"];
+                            $timepost = $row["timepost"];
+                            $content = $row["content"];
+                            $timepost = $row["timepost"];
+                            $image = $row["image"];
 
-              $result = mysqli_query($conn, $sql_command);
-              if (mysqli_num_rows($result) > 0) {
-                        // output data of each row
-                        while($row = mysqli_fetch_assoc($result)) {
-                          $id = $row["idpost"];
-                          $title = $row["title"];
-                          $username = $row["username"];
-                          $timepost = $row["timepost"];
-                          $content = $row["content"];
-                          $timepost = $row["timepost"];
-                          $image = $row["image"];
-
-                          echo '<!-- First Blog Post -->
-                          <h2 class="post-title">
-                            <a href="post.html">'.$title.'</a>
-                          </h2>
-                          <p class="lead">
-                            by '.$username.'
-                          </p>
-                          <p><span class="glyphicon glyphicon-time"></span>'.$timepost.'</p>
-                          <p>'.$content.'</p>
-                          <a class="btn btn-default" href="http://localhost:9090/myblogproject/readmorepost.php?id='.$id.'">Read More</a>
-                          <hr>';
+                            echo '<!-- First Blog Post -->
+                            <h2 class="post-title">
+                              <a href="post.html">'.$title.'</a>
+                            </h2>
+                            <p class="lead">
+                              by '.$username.'
+                            </p>
+                            <p><span class="glyphicon glyphicon-time"></span>'.$timepost.'</p>
+                            <p>'.$content.'</p>
+                            <a class="btn btn-default" href="http://localhost:9090/myblogproject/readmorepost.php?id='.$id.'">Read More</a>
+                            <hr>';
                         }
                     } else {
                         echo "0 results";
                     }
-
-              mysqli_close($conn);
-            }
-          
-          
+                    mysqli_close($conn);
+              }
+              else{
+                $sql_command = "SELECT * FROM posts";
+                echo ("fail");
+                $result = mysqli_query($conn, $sql_command);
+                if (mysqli_num_rows($result) > 0) {
+                          // output data of each row
+                          while($row = mysqli_fetch_assoc($result)) {
+                            $id = $row["idpost"];
+                            $title = $row["title"];
+                            $username = $row["username"];
+                            $timepost = $row["timepost"];
+                            $content = $row["content"];
+                            $timepost = $row["timepost"];
+                            $image = $row["image"];
+  
+                            echo '<!-- First Blog Post -->
+                            <h2 class="post-title">
+                              <a href="post.html">'.$title.'</a>
+                            </h2>
+                            <p class="lead">
+                              by '.$username.'
+                            </p>
+                            <p><span class="glyphicon glyphicon-time"></span>'.$timepost.'</p>
+                            <p>'.$content.'</p>
+                            <a class="btn btn-default" href="http://localhost:9090/myblogproject/readmorepost.php?id='.$id.'">Read More</a>
+                            <hr>';
+                          }
+                      } else {
+                          echo "0 results";
+                      }
+  
+                mysqli_close($conn);
+              }
+              }                                       
           ?>
         </div>
 
@@ -185,7 +222,7 @@
   
   header{
       min-height: 100vh;
-      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(images/794.jpg) center/cover no-repeat fixed;
+      background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(https://i.idol.st/u/background/ZrHCUFBackground-MY7B6n.png?fbclid=IwAR3ynQy0rSkUhURtewT4VgYsCXXdEM3Z2mVgfOJtoDP9s1E_s4kJQ1mDkVg.jpg) center/cover no-repeat fixed;
       display: flex;
       flex-direction: column;
       justify-content: stretch;
@@ -204,7 +241,7 @@
       line-height: 1.2;
   }
   .banner-title span{
-      font-family: 'Varela Round';
+      font-family: 'Suez One';
       color: var(--exDark);
   }
   .banner p{

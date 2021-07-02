@@ -1,5 +1,5 @@
 <?php
-   session_start();
+   //session_start();
    //Change these configs according to your MySQL server
    $servername = "localhost";
    $username = "root";
@@ -11,8 +11,7 @@
 	#mysqli_set_charset('utf8', $conn);
 		// Check connection
 		if ($conn->connect_error) {
-			$_SESSION['msg'] = "Connection failed";
-            echo ("successfull");
+            echo ("failed!");
 		    //die("Connection failed: " . $conn->connect_error);
 		}
 		else{
@@ -24,16 +23,15 @@
 			// $name = mysqli_real_escape_string($conn, $_POST['name']);
 			
 			//Create SQL command to insert data to database
-			$sql_command = "SELECT * FROM $table WHERE username = '.$username.' AND password = '.$password.'";
-
-         $result = mysqli_query($conn, $sql_command);
-         if (mysqli_num_rows($result) > 0) {
-            echo ("successfull!");
-            header('location:http://localhost:9090/myblogproject/Blog.php');
-				
-         }
+			$sql_command = "SELECT * FROM $table WHERE username = '".$name."' and password = '".$password."';";
+			$result = mysqli_query($conn, $sql_command);
+			if (mysqli_num_rows($result) > 0) {				
+            	header('location:http://localhost:9090/myblogproject/Blog.php');
+								
+         	}
 			else
-				$_SESSION['msg'] = $conn->error;
+					
+				header('location:http://localhost:9090/myblogproject');
 
 			mysqli_close($conn);
 		}

@@ -21,11 +21,13 @@
 			$name = $_POST['name'];
 			$email = $_POST['email'];
 			$password = $_POST['password'];
+			$hashed_password = password_hash($password, PASSWORD_DEFAULT);
+			echo ($hashed_password);
 			}
 			// $name = mysqli_real_escape_string($conn, $_POST['name']);
 			
 			//Create SQL command to insert data to database
-			$sql_command = "INSERT INTO $table (username, password,email, cookie) VALUES ('$name','$password','$email',null)";
+			$sql_command = "INSERT INTO $table (username, password,email, cookie) VALUES ('$name','$hashed_password','$email',null)";
 
 			if ($conn->query($sql_command) === TRUE)
 				// $_SESSION['msg'] = "New record created successfully";
