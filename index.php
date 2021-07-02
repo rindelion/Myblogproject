@@ -1,16 +1,13 @@
 <?php
-    session_start();
-    //include('conn.php');
-    if (isset($_COOKIE["cookie"]))
-       header("location:login.php");
+   session_start();
+   //include('conn.php');
+   if (isset($_COOKIE["cookie"]))
+      header("location:login.php");
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
    <meta charset="utf-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1">
    <title>User Login</title>
 </head>
 <body>
@@ -34,11 +31,11 @@
       <div class="field-set">
          
          <!--   user name -->
-            <span class="input-item">
-               <i class="fa fa-user-circle"></i>
-            </span>
-            <!--   user name Input-->
-            <input class="form-input" id="username" type="text" placeholder="Username" name="username" required>
+         <span class="input-item">
+            <i class="fa fa-user-circle"></i>
+         </span>
+         <!--   user name Input-->
+         <input class="form-input" id="user" type="text" placeholder="Username" name="username" required>
          
          <br>
          
@@ -46,74 +43,72 @@
          
          <span class="input-item">
             <i class="fa fa-key"></i>
-            </span>
+         </span>
          <!--   Password Input-->
-         <input class="form-input" type="password" placeholder="Password" id="password" name="password" required>
+         <input class="form-input" type="password" placeholder="Password" id="pwd" name="password" required>
          
-   <!--      Show/hide password  -->
-          <span>
-            <i class="fa fa-eye" aria-hidden="true"  type="button" id="eye"></i>
-         </span> 
-         
-         
+         <br><br>
+   <!--      Remember me  -->
+         <input type="checkbox" name="remember"> Remember me <br><br>
+
+         <?php
+            if (isset($_SESSION['message'])){
+               echo $_SESSION['message'];
+            }
+            unset($_SESSION['message']);
+         ?>
          <br>
    <!--        buttons -->
    <!--      button LogIn -->
-         <button  class="log-in"> Log In </button>
-
-         <!-- <span class = "input-item">
-            <div class = "login-form"></div>
-         </span> -->
-   </div>
+         <button class="log-in" type="submit" name="login"> Log In </button>
+      </div>
       
    <!--   other buttons -->
       <div class="other">
    <!--      Forgot Password button-->
          <button class="btn submits frgt-pass">Forgot Password?</button>
    <!--     Sign Up button -->
-         <a href="http://localhost:9090/myblogproject/Signup.html" >
-            <button href="http://localhost:9090/myblogproject/Signup.html" class="btn submits sign-up" type="button">Sign Up          
+         <button onclick="javascript:location.href='http://localhost:9090/myblogproject/Signup.html'" class="btn submits sign-up">Sign Up 
    <!--         Sign Up font icon -->
          <i class="fa fa-user-plus" aria-hidden="true"></i>
          </button>
-         </a>
    <!--      End Other the Division -->
       </div>
          
    <!--   End Conrainer  -->
       </div>
-      
-      <script>        
-         //Kiểm tra username password được nhập không
-         function Checknull()
-         {
-            var user = document.getElementById("username").value;
-            var pwd = document.getElementById("password").value;
-            if (user=="" || pwd=="") {
-               alert ("Username và password không được bỏ trống!");
-               return false;
-            }
-            else return true;
-         }
-         function CheckLength()
-         {
-            var pwd = document.getElementById("password").value;
-            if (pwd.length<8)
-            {
-               alert ("Password có tối thiểu 8 kí tự.")
-               return false;
-            }
-            return true;
-         }
-      </script>
       <!-- End Form -->
    </form>
    </div>
-   <?php
-        if (isset($_SESSION['message'])){
-            echo $_SESSION['message'];
-        }
-        unset($_SESSION['message']);
-    ?>
 </body>
+<!-- <script>
+   function Login(){
+      if (Checknull() && CheckLength())
+      {
+         document.getElementById("field-set").submit();
+      }
+   }
+   
+   //Kiểm tra username password được nhập không
+   function Checknull()
+   {
+      var user = document.getElementById("username").value;
+      var pwd = document.getElementById("passwd").value;
+      if (user=="" || pwd=="") {
+         alert ("Username và password không được bỏ trống!");
+         return false;
+      }
+      else return true;
+   }
+   function CheckLength()
+   {
+      var pwd = document.getElementById("passwd").value;
+      if (pwd.length<8)
+      {
+         alert ("Password có tối thiểu 8 kí tự.")
+         return false;
+      }
+      return true;
+   } 
+</script>-->
 </html>

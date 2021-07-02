@@ -22,7 +22,7 @@
 		$username=$_POST['username'];
 		$password=$_POST['password'];
 
-		$query=mysqli_query($conn,"select * from user where username='$username' && password='$password'");
+		$query=mysqli_query($conn,"select * from users where username='$username' && password='$password'");
 	
 		if (mysqli_num_rows($query) == 0){
 			$_SESSION['message']="Login Failed. User not Found!";
@@ -37,7 +37,7 @@
 				setcookie("cookie", random_str(), time() + (86400 * 30));
 			}
 
-			$_SESSION['userid']=$row['userid'];
+			$_SESSION['iduser']=$row['iduser'];
 			$_SESSION['username']=$row['username'];
 			header('location:blog.php');
 		}
@@ -50,7 +50,7 @@
 			$query=mysqli_query($conn,"select * from user where cookie='$cookie'");
 			$row=mysqli_fetch_array($query);
 
-			$_SESSION['userid']=$row['userid'];
+			$_SESSION['iduser']=$row['iduser'];
 			$_SESSION['username']=$row['username'];
 			header('location:blog.php');
 		} else {
